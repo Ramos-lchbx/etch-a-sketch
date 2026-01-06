@@ -1,18 +1,27 @@
 let container = document.querySelector(".container");
 
+let counter = 0;
+
 for (let i = 0 ; i < 256 ; i++){
     const div = document.createElement("div");
     container.appendChild(div);
-
     const rgbValue = getRandomRgb();
 
     div.style.backgroundColor = "rgb(100, 165, 221)";
     div.style.width = "50px";
     div.style.height = "50px";
-    div.addEventListener("mouseenter", () => {
-    div.style.backgroundColor = `${rgbValue}`; 
-});
+    div.addEventListener("mouseenter", () => makeTrail(div, rgbValue) );
+    
+}
 
+function makeTrail(div, rgbValue){
+    div.style.backgroundColor = `${rgbValue}`;
+    div.style.opacity = `${counter*10}%`;
+    if (counter <= 10) {
+        counter++;
+    }
+    console.log(counter);
+}
 
 function getRandomRgb(){
     const r = Math.floor(Math.random() * 256);
@@ -20,12 +29,6 @@ function getRandomRgb(){
     const b = Math.floor(Math.random() * 256);
 
     return `rgb(${r}, ${g}, ${b})`
-}
-
-}
-
-function colorChange(div){
-    div.style.backgroundColor = "blue"
 }
 
 let sizePrompt = document.querySelector("button")
@@ -38,6 +41,8 @@ function newSize(){
 
         container.innerHTML = "";
 
+        counter = 0;
+
         for (let i= 0 ; i < userSize ** 2 ; i++){
         const div = document.createElement("div");
         container.appendChild(div);
@@ -45,9 +50,7 @@ function newSize(){
         div.style.backgroundColor = "rgb(100, 165, 221)";
         div.style.width = `${800/userSize}px`;
         div.style.height = `${800/userSize}px`;
-        div.addEventListener("mouseenter", () => {
-            div.style.backgroundColor = `${rgbValue}`; 
-            });
+        div.addEventListener("mouseenter", () => makeTrail(div, rgbValue));
         }
     }
     else alert("TOO BIG, DUMMY");
@@ -57,7 +60,5 @@ function newSize(){
     
 }
 
-for (let i= 0 ; i < newSize ** 2 ; i++){
 
-}
 
